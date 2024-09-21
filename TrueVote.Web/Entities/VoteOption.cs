@@ -6,4 +6,6 @@ public sealed class VoteOption
     public string Description { get; set; }
     public string FilePath { get; set; }
     public int ReceivedVotes { get; set; }
+    public Guid SurveyId { get; set; }
+    public Survey Survey { get; set; }
 }
