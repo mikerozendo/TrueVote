@@ -1,29 +1,38 @@
-<body>
-    <h1>Vota ai</h1>
-    <div class="grid-container">
-        <div class="grid-item">
-            <img src="~/images/boules.jpg" alt="Option 1">
-            <button class="vote-btn">Vote</button>
-        </div>
-        <div class="grid-item">
-            <img src="~/images/datena.jpeg" alt="Option 1">
-            <button class="vote-btn">Vote</button>
-        </div>
-        <div class="grid-item">
-            <img src="~/images/instala_drive.jpg" alt="Option 1">
-            <button class="vote-btn">Vote</button>
-        </div>
-        <div class="grid-item">
-            <img src="~/images/ricardo_nunes_piscina.jpg" alt="Option 1">
-            <button class="vote-btn">Vote</button>
-        </div>
-        <div class="grid-item">
-            <img src="~/images/tabatha_amaral.jpg" alt="Option 1">
-            <button class="vote-btn">Vote</button>
-        </div>
-        <div class="grid-item">
-            <img src="~/images/marina.jpg" alt="Option 1">
-            <button class="vote-btn">Vote</button>
-        </div>
+<h1>Vota ai</h1>
+<div class="grid-container">
+    <div class="grid-item">
+        <img src="~/images/boules.jpg" alt="Option 1">
+        <button class="vote-btn">Vote</button>
     </div>
-</body>
+    <div class="grid-item">
+        <img src="~/images/datena.jpeg" alt="Option 1">
+        <button class="vote-btn">Vote</button>
+    </div>
+    <div class="grid-item">
+        <img src="~/images/instala_drive.jpg" alt="Option 1">
+        <button class="vote-btn">Vote</button>
+    </div>
+    <div class="grid-item">
+        <img src="~/images/ricardo_nunes_piscina.jpg" alt="Option 1">
+        <button class="vote-btn">Vote</button>
+    </div>
+    <div class="grid-item">
+        <img src="~/images/tabatha_amaral.jpg" alt="Option 1">
+        <button class="vote-btn">Vote</button>
+    </div>
+    <div class="grid-item">
+        <img src="~/images/marina.jpg" alt="Option 1">
+        <button class="vote-btn">Vote</button>
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript" src="~/lib/signalr/signalr.js"></script>
+    <script type="text/javascript">
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("/hubs/vote")
+            .build();
+
+        connection.start().catch(err => console.error(err.toString()));
+    </script>>
+}

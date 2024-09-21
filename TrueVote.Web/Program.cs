@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using TrueVote.Web.Hubs;
 using TrueVote.Web.Repositories;
 using TrueVote.Web.Repositories.Interfaces;
 using TrueVote.Web.Services;
@@ -15,6 +16,7 @@ builder.Services.AddDbContextPool<ApplicationDbContext>(
     .UseChangeTrackingProxies(false));
 
 
+builder.Services.AddSignalR();
 builder.Services.AddScoped<ISubmitVoteService, SubmitVoteService>();
 builder.Services.AddScoped<IVoteRepository, VoteRepository>();
 
@@ -32,4 +34,5 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Votes}/{action=Index}/{id?}");
 
+app.MapHub<VoteCreatedNotificationHub>("/hubs/vote");
 app.Run();
