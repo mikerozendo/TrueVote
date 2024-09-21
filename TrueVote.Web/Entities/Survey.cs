@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
 namespace TrueVote.Web.Entities;
 
-public sealed class Survey(Guid id, string name, string description)
+public class Survey(Guid id, string name, string description)
 {
     public Guid Id { get; set; } = id;
     public string Name { get; set; } = name;

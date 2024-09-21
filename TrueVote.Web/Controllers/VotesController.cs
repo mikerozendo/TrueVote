@@ -14,12 +14,12 @@ public sealed class VotesController(ISubmitVoteService submitVoteService) : Cont
     /// <summary>
     /// Submits a new vote for a VoteOption
     /// </summary>
-    /// <param name="SurveyId">Survey ID</param>
+    /// <param name="surveyId">Survey ID</param>
     [HttpPatch]
-    [Route("/Votes/{SurveyId}/Submit")]
-    public async Task<IActionResult> Submit([FromRoute] Guid SurveyId)
+    [Route("/Votes/Submit/{surveyId}")]
+    public async Task<IActionResult> Submit([FromRoute] Guid surveyId)
     {
-        await submitVoteService.SubmitAsync(SurveyId);
+        await submitVoteService.SubmitAsync(surveyId);
         return Accepted();
     }
 }

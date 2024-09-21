@@ -1,6 +1,6 @@
 namespace TrueVote.Web.Entities;
 
-public sealed class VoteOption
+public class VoteOption
 {
     public Guid Id { get; set; }
     public string Description { get; set; }

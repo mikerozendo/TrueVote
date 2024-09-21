@@ -1,6 +1,6 @@
 namespace TrueVote.Web.Entities;
 
-public sealed class SurveyDetails(Survey survey)
+public class SurveyDetails(Survey survey)
 {
     private readonly Survey? _survey = survey;
 
