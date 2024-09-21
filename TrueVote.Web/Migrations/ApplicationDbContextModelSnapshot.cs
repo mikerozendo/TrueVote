@@ -22,73 +22,25 @@ namespace TrueVote.Web.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("TrueVote.Web.Entities.Survey", b =>
+            modelBuilder.Entity("TrueVote.Web.Entities.VoteOption", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("ExpirationDate")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Id");
-
-                    b.ToTable("Surveys", (string)null);
-                });
-
-            modelBuilder.Entity("TrueVote.Web.Entities.VoteOption", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FilePath")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ReceivedVotes")
+                    b.Property<int>("OptionKey")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("SurveyId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
 
                     b.HasIndex("Id");
 
-                    b.HasIndex("SurveyId");
+                    b.HasIndex("OptionKey");
 
                     b.ToTable("VoteOptions", (string)null);
-                });
-
-            modelBuilder.Entity("TrueVote.Web.Entities.VoteOption", b =>
-                {
-                    b.HasOne("TrueVote.Web.Entities.Survey", "Survey")
-                        .WithMany("VoteOptions")
-                        .HasForeignKey("SurveyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Survey");
-                });
-
-            modelBuilder.Entity("TrueVote.Web.Entities.Survey", b =>
-                {
-                    b.Navigation("VoteOptions");
                 });
 #pragma warning restore 612, 618
         }

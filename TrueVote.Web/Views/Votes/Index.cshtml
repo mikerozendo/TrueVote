@@ -40,7 +40,7 @@
         function submitVote(voteOption){
             let url = `@Url.Action("Submit", "Votes")/${voteOption}`;
 
-            fetch(url,{method: 'PATCH'})
+            fetch(url,{method: 'POST'})
                 .then(response => {
                     if (!response.status === 201) {
                         hubConnection.send('OnVoteCreated');

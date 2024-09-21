@@ -5,7 +5,6 @@ namespace TrueVote.Web.Controllers;
 
 public sealed class VotesController(ISubmitVoteService submitVoteService) : Controller
 {
-    // GET
     public IActionResult Index()
     {
         return View();
@@ -14,12 +13,12 @@ public sealed class VotesController(ISubmitVoteService submitVoteService) : Cont
     /// <summary>
     /// Submits a new vote for a VoteOption
     /// </summary>
-    /// <param name="surveyId">Survey ID</param>
-    [HttpPatch]
-    [Route("/Votes/Submit/{surveyId}")]
-    public async Task<IActionResult> Submit([FromRoute] Guid surveyId)
+    /// <param name="voteOption">Survey ID</param>
+    [HttpPost]
+    [Route("/Votes/Submit/{voteOption}")]
+    public async Task<IActionResult> Submit([FromRoute] int voteOption)
     {
-        await submitVoteService.SubmitAsync(surveyId);
+        await submitVoteService.CreateAsync(voteOption);
         return Accepted();
     }
 }
