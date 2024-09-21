@@ -1,5 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using TrueVote.Web.Repositories;
+using TrueVote.Web.Repositories.Interfaces;
+using TrueVote.Web.Services;
+using TrueVote.Web.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +13,11 @@ builder.Services.AddDbContextPool<ApplicationDbContext>(
     .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
     .UseLazyLoadingProxies(false)
     .UseChangeTrackingProxies(false));
+
+
+builder.Services.AddScoped<ISubmitVoteService, SubmitVoteService>();
+builder.Services.AddScoped<IVoteRepository, VoteRepository>();
+
 
 var app = builder.Build();
     
