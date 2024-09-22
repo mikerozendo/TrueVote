@@ -4,15 +4,15 @@ using TrueVote.Web.Services.Interfaces;
 
 namespace TrueVote.Web.Services;
 
-public class VotationDetailsService(IVoteRepository voteRepository) : IVotationDetailsService
+public class VotationDetailsService(IReceivedVotesRepository receivedVotesRepository) : IVotationDetailsService
 {
     public async Task<IEnumerable<VoteReportByOption>> GetAsync()
     {
-        var receivedVotes = await voteRepository.GetVotesAsync();
+        var receivedVotes = await receivedVotesRepository.GetVotesAsync();
         if (receivedVotes.Count == 0)
             return [];
 
-        var groupedVotesByOption = receivedVotes.GroupBy(x => x.OptionKey).ToList();
+        var groupedVotesByOption = receivedVotes.GroupBy(x => x.VoteOptionDetailsId).ToList();
         if (groupedVotesByOption.Count == 0)
             return [];
 

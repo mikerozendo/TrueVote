@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using TrueVote.Web;
 using TrueVote.Web.Hubs;
 using TrueVote.Web.Repositories;
 using TrueVote.Web.Repositories.Interfaces;
@@ -10,19 +11,23 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContextPool<ApplicationDbContext>(
     options => options
-    .UseSqlServer(builder.Configuration.GetConnectionString("SqlServer"))
-    .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
-    .UseLazyLoadingProxies(false)
-    .UseChangeTrackingProxies(false));
+        .UseSqlServer(builder.Configuration.GetConnectionString("SqlServer"))
+        .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
+        .UseLazyLoadingProxies(false)
+        .UseChangeTrackingProxies(false));
 
 
 builder.Services.AddSignalR();
 builder.Services.AddScoped<ISubmitVoteService, SubmitVoteService>();
-builder.Services.AddScoped<IVoteRepository, VoteRepository>();
+builder.Services.AddScoped<IReceivedVotesRepository, ReceivedVotesRepository>();
+builder.Services.AddScoped<IVotationDetailsService, VotationDetailsService>();
+builder.Services.AddScoped<IVoteOptionsDetailsRepository, VoteOptionsDetailsRepository>();
 
+
+builder.Services.AddDataSeed();
 
 var app = builder.Build();
-    
+
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
@@ -32,7 +37,7 @@ if (!app.Environment.IsDevelopment())
 app.UseStaticFiles();
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Votes}/{action=Votation}/{id?}");
+    pattern: "{controller=Votes}/{action=Index}/{id?}");
 
 app.MapHub<VoteCreatedNotificationHub>("/hubs/vote");
 app.Run();
