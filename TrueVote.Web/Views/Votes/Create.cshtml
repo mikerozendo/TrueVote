@@ -43,9 +43,10 @@
             fetch(url,{method: 'POST'})
                 .then(response => {
                     if (!response.status === 201) {
-                        hubConnection.send('OnVoteCreated');
                         throw new Error('Network response was not ok ' + response.statusText);
                     }
+                    
+                    hubConnection.send('OnVoteCreated');
                     return response.json();
                 })
                 .catch(error => {
