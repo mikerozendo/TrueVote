@@ -6,19 +6,21 @@
     {
         <div class="report-item">
             <img src="@Url.Content($"~/{@report.VoteOptionDetails.FilePath}")" alt="image">
-            <p>Votos: <span class="vote-count">@report.ReceivedVotesAmount</span></p>
+            <p>Votos: <span class="vote-count" id="voteoption'@report.VoteOptionDetails.OptionKey'">@report.ReceivedVotesAmount</span></p>
         </div>
     }
 </div>
 
 @section scripts{
     <script type="text/javascript" src="~/lib/signalr/signalr.js"></script>
-    @* <script type="text/javascript"> *@
-    @*     var hubConnection = new signalR.HubConnectionBuilder().withUrl("/hubs/vote").build(); *@
-    @*     hubConnection.start(); *@
-    @* *@
-    @*     hubConnection.on('OnVoteUpdated', (updatedReport) =>{ *@
-    @*         console.log('Voto atualizado:', updatedReport); *@
-    @*     }); *@
-    @* </script> *@
+    <script type="text/javascript">
+        var hubConnection = new signalR.HubConnectionBuilder().withUrl("/hubs/vote").build();
+        hubConnection.start();
+
+        hubConnection.on('OnVoteCreated', (val) =>{
+            let optionThatReceivedANewVote = document.getElementById(`voteoption'${val}'`);
+            optionThatReceivedANewVote.textContent = parseInt(optionThatReceivedANewVote.textContent) + 1;
+        });
+
+    </script>
 }

@@ -4,8 +4,8 @@ namespace TrueVote.Web.Hubs;
 
 public class VoteCreatedNotificationHub : Hub
 {
-    public async Task OnVoteCreated()
+    public async Task OnVoteCreated(int voteOptionKey)
     {
-        await Clients.Others.SendAsync("OnVoteCreated", "Toma cadeirada");
+        await Clients.Others.SendAsync("OnVoteCreated", voteOptionKey);
     }
 }

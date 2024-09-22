@@ -18,10 +18,6 @@
         var hubConnection = new signalR.HubConnectionBuilder().withUrl("/hubs/vote").build();
         hubConnection.start();
 
-        hubConnection.on('OnVoteCreated', (val) =>{
-            console.log(val);
-        });
- 
         function submitVote(voteOption){
             let url = `@Url.Action("Submit", "Votes")/${voteOption}`;
 
@@ -31,7 +27,7 @@
                         throw new Error('Network response was not ok ' + response.statusText);
                     }
                     
-                    hubConnection.send('OnVoteCreated');
+                    hubConnection.send('OnVoteCreated', voteOption);
                 })
                 .catch(error => {
                     console.error('There has been a problem with your fetch operation:', error);
