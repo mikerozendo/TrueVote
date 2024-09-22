@@ -4,7 +4,7 @@ using TrueVote.Web.Services.Interfaces;
 
 namespace TrueVote.Web.Services;
 
-public class VotationDetailsService(IReceivedVotesRepository receivedVotesRepository) : IVotationDetailsService
+public class VotationReportService(IReceivedVotesRepository receivedVotesRepository) : Interfaces.IVotationReportService
 {
     public async Task<IEnumerable<VoteReportByOption>> GetAsync()
     {
