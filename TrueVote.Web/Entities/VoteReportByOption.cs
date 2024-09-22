@@ -7,7 +7,7 @@ public class VoteReportByOption
     public int OtherCompetitorReceivedVotes { get; private set; }
     public int ReceivedVotesPercenteage { get; private set; }
 
-    public VoteReportByOption(IGrouping<int, VoteOption> currentVoteOption, int otherCompetitorReceivedVotes)
+    public VoteReportByOption(IGrouping<int, ReceivedVote> currentVoteOption, int otherCompetitorReceivedVotes)
     {
         OptionKey = currentVoteOption.Key;
         ReceivedVotesAmout = currentVoteOption.Count();
