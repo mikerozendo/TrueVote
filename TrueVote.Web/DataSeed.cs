@@ -11,8 +11,8 @@ public static class DataSeed
     {
         var serviceProvider = services.BuildServiceProvider();
         var dbContext = serviceProvider.GetRequiredService<ApplicationDbContext>();
-        dbContext.Database.EnsureCreated();
-        dbContext.Database.Migrate();
+        // dbContext.Database.EnsureCreated();
+        // dbContext.Database.Migrate();
         
         var createdVoteOptionsDetails = dbContext.VoteOptionDetails.ToList();
         if (!createdVoteOptionsDetails.IsNullOrEmpty()) //should populate this table only once
