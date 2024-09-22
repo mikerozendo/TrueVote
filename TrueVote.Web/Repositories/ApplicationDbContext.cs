@@ -18,16 +18,15 @@ public sealed class ApplicationDbContext(DbContextOptions<ApplicationDbContext> 
         
         modelBuilder.Entity<ReceivedVote>()
             .HasIndex(voteOption => voteOption.Id);
-        
+
         modelBuilder.Entity<ReceivedVote>()
             .HasOne<VoteOptionDetails>(voteOption => voteOption.VoteOptionDetails)
-            .WithMany(x => x.ReceivedVotes)
-            .HasForeignKey(x => x.VoteOptionDetailsId);
-        
+            .WithMany(x => x.ReceivedVotes);
+         
         modelBuilder.Entity<VoteOptionDetails>()
             .HasMany<ReceivedVote>(voteOption => voteOption.ReceivedVotes)
             .WithOne(x => x.VoteOptionDetails)
-            .HasForeignKey(x => x.Id);
+            .HasForeignKey(x => x.VoteOptionDetailsId);
 
         modelBuilder.Entity<VoteOptionDetails>()
             .ToTable(nameof(VoteOptionDetails))

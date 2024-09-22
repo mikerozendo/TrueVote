@@ -11,7 +11,6 @@ public class SubmitVoteService(
     public async Task CreateAsync(int voteOptionKey)
     {
         var optionDetails = await voteOptionsDetailsRepository.GetByOptionKeyAsync(voteOptionKey);
-        var voteOption = new ReceivedVote(Guid.NewGuid(), optionDetails.Id);
-        await receivedVotesRepository.CreateAsync(voteOption);
+        await receivedVotesRepository.CreateAsync( new ReceivedVote(Guid.NewGuid(), optionDetails.Id));
     }
 }

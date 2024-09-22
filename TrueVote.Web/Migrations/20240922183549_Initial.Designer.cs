@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TrueVote.Web.Repositories;
 
@@ -11,9 +12,11 @@ using TrueVote.Web.Repositories;
 namespace TrueVote.Web.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240922183549_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -25,7 +28,6 @@ namespace TrueVote.Web.Migrations
             modelBuilder.Entity("TrueVote.Web.Entities.ReceivedVote", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedAt")
@@ -37,8 +39,6 @@ namespace TrueVote.Web.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("Id");
-
-                    b.HasIndex("VoteOptionDetailsId");
 
                     b.ToTable("ReceivedVotes", (string)null);
                 });
@@ -70,7 +70,7 @@ namespace TrueVote.Web.Migrations
                 {
                     b.HasOne("TrueVote.Web.Entities.VoteOptionDetails", "VoteOptionDetails")
                         .WithMany("ReceivedVotes")
-                        .HasForeignKey("VoteOptionDetailsId")
+                        .HasForeignKey("Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

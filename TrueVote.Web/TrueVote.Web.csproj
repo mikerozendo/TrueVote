@@ -35,6 +35,12 @@
       <Compile Remove="Migrations\20240922170544_Initial.Designer.cs" />
       <Compile Remove="Migrations\20240922170844_Initial.cs" />
       <Compile Remove="Migrations\20240922170844_Initial.Designer.cs" />
+      <Compile Remove="Migrations\20240922172136_Initial.cs" />
+      <Compile Remove="Migrations\20240922172136_Initial.Designer.cs" />
+      <Compile Remove="Migrations\20240922183032_Adjusting relashionship configuration.cs" />
+      <Compile Remove="Migrations\20240922183032_Adjusting relashionship configuration.Designer.cs" />
+      <Compile Remove="Migrations\20240922183549_Initial.cs" />
+      <Compile Remove="Migrations\20240922183549_Initial.Designer.cs" />
     </ItemGroup>
 
     <ItemGroup>
