@@ -8,4 +8,7 @@ public class VoteOptionsDetailsRepository(ApplicationDbContext context) : IVoteO
 {
     public async Task<VoteOptionDetails> GetByOptionKeyAsync(int optionKey)
         => await context.VoteOptionDetails.SingleAsync(x => x.OptionKey == optionKey);
+
+    public async Task<IEnumerable<VoteOptionDetails>> GetAsync()
+        => await context.VoteOptionDetails.ToListAsync();
 }

@@ -2,7 +2,7 @@ using TrueVote.Web.Entities;
 
 namespace TrueVote.Web.Services.Interfaces;
 
-public interface IVotationDetailsService
+public interface IVotationReportService
 {
     Task<IEnumerable<VoteReportByOption>> GetAsync();
 }

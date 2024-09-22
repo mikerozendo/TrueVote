@@ -1,29 +1,14 @@
+@model IEnumerable<TrueVote.Web.Entities.VoteOptionDetails>
+
 <h1>Vota ai</h1>
 <div class="grid-container">
-    <div class="grid-item">
-        <img src="~/images/boules.jpg" alt="Option 1">
-        <button class="vote-btn" onclick="submitVote(1)">Vote</button>
-    </div>
-    <div class="grid-item">
-        <img src="~/images/datena.jpeg" alt="Option 1">
-        <button class="vote-btn" onclick="submitVote(2)">Vote</button>
-    </div>
-    <div class="grid-item">
-        <img src="~/images/instala_drive.jpg" alt="Option 1">
-        <button class="vote-btn" onclick="submitVote(3)">Vote</button>
-    </div>
-    <div class="grid-item">
-        <img src="~/images/ricardo_nunes_piscina.jpg" alt="Option 1">
-        <button class="vote-btn" onclic="submitVote(4)">Vote</button>
-    </div>
-    <div class="grid-item">
-        <img src="~/images/tabatha_amaral.jpg" alt="Option 1">
-        <button class="vote-btn" onclick="submitVote(5)">Vote</button>
-    </div>
-    <div class="grid-item">
-        <img src="~/images/marina.jpg" alt="Option 1">
-        <button class="vote-btn" onclick="submitVote(6)">Vote</button>
-    </div>
+    @foreach (var voteOptions in Model)
+    {
+        <div class="grid-item">
+            <img src="@voteOptions.FilePath" alt="image">
+            <button class="vote-btn" onclick="submitVote(@voteOptions.OptionKey)">Vote</button>
+        </div>
+    }
 </div>
 
 @section scripts{
@@ -43,10 +28,10 @@
             fetch(url,{method: 'POST'})
                 .then(response => {
                     if (!response.status === 201) {
-                        hubConnection.send('OnVoteCreated');
                         throw new Error('Network response was not ok ' + response.statusText);
                     }
-                    return response.json();
+                    
+                    hubConnection.send('OnVoteCreated');
                 })
                 .catch(error => {
                     console.error('There has been a problem with your fetch operation:', error);

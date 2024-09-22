@@ -12,8 +12,8 @@ using TrueVote.Web.Repositories;
 namespace TrueVote.Web.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240922152524_Creating VoteOptionDetails with relashionship with ReceivedVote")]
-    partial class CreatingVoteOptionDetailswithrelashionshipwithReceivedVote
+    [Migration("20240922170544_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,11 +28,31 @@ namespace TrueVote.Web.Migrations
             modelBuilder.Entity("TrueVote.Web.Entities.ReceivedVote", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
+
+                    b.Property<Guid>("VoteOptionDetailsId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Id");
+
+                    b.ToTable("ReceivedVotes", (string)null);
+                });
+
+            modelBuilder.Entity("TrueVote.Web.Entities.VoteOptionDetails", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("FilePath")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<int>("OptionKey")
                         .HasColumnType("int");
@@ -43,25 +63,6 @@ namespace TrueVote.Web.Migrations
 
                     b.HasIndex("OptionKey");
 
-                    b.ToTable("VoteOptions", (string)null);
-                });
-
-            modelBuilder.Entity("TrueVote.Web.Entities.VoteOptionDetails", b =>
-                {
-                    b.Property<int>("OptionKey")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OptionKey"));
-
-                    b.Property<string>("FilePath")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("OptionKey");
-
-                    b.HasIndex("OptionKey");
-
                     b.ToTable("VoteOptionDetails", (string)null);
                 });
 
@@ -69,7 +70,7 @@ namespace TrueVote.Web.Migrations
                 {
                     b.HasOne("TrueVote.Web.Entities.VoteOptionDetails", "VoteOptionDetails")
                         .WithMany("ReceivedVotes")
-                        .HasForeignKey("OptionKey")
+                        .HasForeignKey("Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
