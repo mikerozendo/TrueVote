@@ -4,11 +4,14 @@ using TrueVote.Web.Services.Interfaces;
 
 namespace TrueVote.Web.Services;
 
-public class SubmitVoteService(IVoteRepository repository) : ISubmitVoteService
+public class SubmitVoteService(
+    IReceivedVotesRepository receivedVotesRepository,
+    IVoteOptionsDetailsRepository voteOptionsDetailsRepository) : ISubmitVoteService
 {
     public async Task CreateAsync(int voteOptionKey)
     {
-        var voteOption = new ReceivedVote(Guid.NewGuid(), voteOptionKey);
-        await repository.CreateAsync(voteOption);
+        var optionDetails = await voteOptionsDetailsRepository.GetByOptionKeyAsync(voteOptionKey);
+        var voteOption = new ReceivedVote(Guid.NewGuid(), optionDetails.Id);
+        await receivedVotesRepository.CreateAsync(voteOption);
     }
 }

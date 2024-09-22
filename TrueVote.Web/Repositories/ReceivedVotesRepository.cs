@@ -4,16 +4,16 @@ using TrueVote.Web.Repositories.Interfaces;
 
 namespace TrueVote.Web.Repositories;
 
-public class VoteRepository(ApplicationDbContext context) : IVoteRepository
+public class ReceivedVotesRepository(ApplicationDbContext context) : IReceivedVotesRepository
 {
     public async Task CreateAsync(ReceivedVote receivedVote)
     {
-        context.VoteOptions.Add(receivedVote);
+        context.ReceivedVotes.Add(receivedVote);
         await context.SaveChangesAsync();
     }
 
     public async Task<List<ReceivedVote>> GetVotesAsync()
     {
-        return await context.VoteOptions.ToListAsync();
+        return await context.ReceivedVotes.ToListAsync();
     }
 }

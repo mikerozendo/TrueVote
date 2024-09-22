@@ -26,6 +26,15 @@
 
     <ItemGroup>
       <Compile Remove="Controllers\SurveysController.cs" />
+      <Compile Remove="Migrations\20240921234437_Changing db schema.cs" />
+      <Compile Remove="Migrations\20240921234437_Changing db schema.Designer.cs" />
+      <Compile Remove="Migrations\ApplicationDbContextModelSnapshot.cs" />
+      <Compile Remove="Migrations\20240921185103_Initial.cs" />
+      <Compile Remove="Migrations\20240921185103_Initial.Designer.cs" />
+      <Compile Remove="Migrations\20240922170544_Initial.cs" />
+      <Compile Remove="Migrations\20240922170544_Initial.Designer.cs" />
+      <Compile Remove="Migrations\20240922170844_Initial.cs" />
+      <Compile Remove="Migrations\20240922170844_Initial.Designer.cs" />
     </ItemGroup>
 
     <ItemGroup>
@@ -38,6 +47,10 @@
       <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\dist\jquery.min.js" />
       <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\dist\jquery.min.map" />
       <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\LICENSE.txt" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Migrations\" />
     </ItemGroup>
 
 </Project>
