@@ -32,7 +32,7 @@ if (!app.Environment.IsDevelopment())
 app.UseStaticFiles();
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Votes}/{action=Index}/{id?}");
+    pattern: "{controller=Votes}/{action=Votation}/{id?}");
 
 app.MapHub<VoteCreatedNotificationHub>("/hubs/vote");
 app.Run();

@@ -11,4 +11,9 @@ public class VoteRepository(ApplicationDbContext context) : IVoteRepository
         context.VoteOptions.Add(voteOption);
         await context.SaveChangesAsync();
     }
+
+    public async Task<List<VoteOption>> GetVotesAsync()
+    {
+        return await context.VoteOptions.ToListAsync();
+    }
 }
