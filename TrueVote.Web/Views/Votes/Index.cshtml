@@ -5,10 +5,8 @@
     @foreach (var report in Model)
     {
         <div class="report-item">
-            <img src="@report.VoteOptionDetails.FilePath" alt="image">
-            <h2>''</h2>
+            <img src="@Url.Content($"~/{@report.VoteOptionDetails.FilePath}")" alt="image">
             <p>Votos: <span class="vote-count">@report.ReceivedVotesAmount</span></p>
-            @* <p>Data de Criação: @report.VoteOptionDetails.ToString("dd/MM/yyyy")</p> *@
         </div>
     }
 </div>

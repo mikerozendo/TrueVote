@@ -5,7 +5,7 @@
     @foreach (var voteOptions in Model)
     {
         <div class="grid-item">
-            <img src="@voteOptions.FilePath" alt="image">
+            <img src="@Url.Content($"~/{@voteOptions.FilePath}")" alt="image">
             <button class="vote-btn" onclick="submitVote(@voteOptions.OptionKey)">Vote</button>
         </div>
     }
