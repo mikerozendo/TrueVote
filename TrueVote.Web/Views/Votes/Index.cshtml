@@ -1,8 +1,26 @@
 @model IEnumerable<TrueVote.Web.Entities.VoteReportByOption>
 
-@{
-    ViewBag.Title = "title";
-    Layout = "_Layout";
-}
+<h1>Relatório de Votações</h1>
+<div class="report-container">
+    @foreach (var report in Model)
+    {
+        <div class="report-item">
+            <img src="@report.VoteOptionDetails.FilePath" alt="image">
+            <h2>''</h2>
+            <p>Votos: <span class="vote-count">@report.ReceivedVotesAmount</span></p>
+            @* <p>Data de Criação: @report.VoteOptionDetails.ToString("dd/MM/yyyy")</p> *@
+        </div>
+    }
+</div>
 
-<h2>title</h2>
+@section scripts{
+    <script type="text/javascript" src="~/lib/signalr/signalr.js"></script>
+    @* <script type="text/javascript"> *@
+    @*     var hubConnection = new signalR.HubConnectionBuilder().withUrl("/hubs/vote").build(); *@
+    @*     hubConnection.start(); *@
+    @* *@
+    @*     hubConnection.on('OnVoteUpdated', (updatedReport) =>{ *@
+    @*         console.log('Voto atualizado:', updatedReport); *@
+    @*     }); *@
+    @* </script> *@
+}

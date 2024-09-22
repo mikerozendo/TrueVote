@@ -1,19 +1,19 @@
+using Microsoft.EntityFrameworkCore.Metadata;
+
 namespace TrueVote.Web.Entities;
 
-public class VoteReportByOption
+public sealed class VoteReportByOption
 {
-    public Guid OptionDetailsId { get; private set; }
-    public int ReceivedVotesAmout { get; private set; }
-    public int OtherCompetitorReceivedVotes { get; private set; }
+    public VoteOptionDetails VoteOptionDetails { get; private set; }
+    public int ReceivedVotesAmount { get; private set; }
     public int ReceivedVotesPercenteage { get; private set; }
 
-    public VoteReportByOption(IGrouping<Guid, ReceivedVote> currentVoteOption, int otherCompetitorReceivedVotes)
+    public VoteReportByOption(VoteOptionDetails details, int receivedVOtesAmount, int votesForALlCompetitors)
     {
-        OptionDetailsId = currentVoteOption.Key;
-        ReceivedVotesAmout = currentVoteOption.Count();
-        OtherCompetitorReceivedVotes = otherCompetitorReceivedVotes;
-        
-        if (ReceivedVotesAmout > 0)
-            ReceivedVotesPercenteage = (ReceivedVotesAmout * 100) / OtherCompetitorReceivedVotes;
+        VoteOptionDetails = details;
+        ReceivedVotesAmount = receivedVOtesAmount;
+
+        if (ReceivedVotesAmount > 0)
+            ReceivedVotesPercenteage = (ReceivedVotesAmount * 100) / votesForALlCompetitors;
     }
 }

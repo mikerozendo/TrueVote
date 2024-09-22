@@ -5,8 +5,8 @@ namespace TrueVote.Web.Controllers;
 
 public sealed class VotesController : Controller
 {
-    // public async Task<IActionResult> Index([FromServices] IVotationReportService votationDetailsService) 
-    //     => View(await votationDetailsService.());
+    public async Task<IActionResult> Index([FromServices] IVotationReportService votationDetailsService) 
+        => View(await votationDetailsService.GetAsync());
 
     public async Task<IActionResult> Create([FromServices] IVoteOptionDetailsService voteOptionsDetailsRepository)
         => View(await voteOptionsDetailsRepository.GetAsync());
