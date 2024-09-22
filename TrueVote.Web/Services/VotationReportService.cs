@@ -25,7 +25,7 @@ public class VotationReportService(
 
         var compositionToBeDetailed = voteOptions.Select(x =>
         {
-            var groupedVotesToThisOption = groupedVotesByOption.Where(y => y.Key == x.Id).ToList().Count;
+            var groupedVotesToThisOption = groupedVotesByOption.FirstOrDefault(y => y.Key == x.Id)?.Count()??0;
             return Tuple.Create(x, groupedVotesToThisOption);
         });
 
